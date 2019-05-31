@@ -4,7 +4,7 @@
     font-family: 'Righteous', cursive;
 } 
 
-.view {
+.intro-2 {
     background: url("https://cdn.pixabay.com/photo/2011/12/14/12/21/orion-nebula-11107_1280.jpg")no-repeat center center;
     background-size: cover;
 }
@@ -30,7 +30,10 @@ footer {
 html,
 body,
 header,
-.view {
+.intro-2 {
   height: 100%;
 }
 
+.smallFont {
+    font-size:smaller
+}

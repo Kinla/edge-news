@@ -1,26 +1,160 @@
+    <!--Main Navigation-->
+    <header>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+        <a class="navbar-brand logo" href="/"><strong>Sci Edge</strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/saved">Saved Article</a>
+            </li>
+        </ul>
+        </div>
+    </nav>
+
+    <div class="view intro-2" style="">
+        <div class="full-bg-img">
+        <div class="mask rgba-purple-light flex-center">
+            <div class="container text-center white-text wow fadeInUp">
+            <br><br><br><br><br>
+                <h1 class="logo">Science Edge</h1>
+                <br>
+                <h5>Read and comment on the lastest articles.</h5>
+                <br><br><br>
+                <p>scroll</p>
+                <div class="animated slideOutDown infinite slower"><i class="fas fa-long-arrow-alt-down"></i></div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    </header>
+    <!--Main Navigation-->
+
+
 <main class="text-center py-5">
   <div class="">
-    <h5>Categories:</h5>
+    {{#each categories}}
+    <button class="btn btn-purple btn-sm">{{name}}</button>
+    {{/each}}
     
   </div>
 
   <div class="container">
-    <div class="row">
-      <div class="col-md-12">
+<!-- Section: Magazine v.2 -->
+<section class="magazine-section my-5">
 
-        <p align="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-          voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-          enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-          nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-          mollit anim id est laborum.</p>
+  <!-- Section description -->
+  <h5 class="text-center dark-grey-text w-responsive mx-auto mb-3">Do you know how common everyday items, such as mirrors, fireworks or sunglasses work?</h5>
+  <h5 class="text-center dark-grey-text w-responsive mx-auto mb-5">These collections of Innovation articles explores the workings of objects you may come into contact with on a regular basis.</h5>
 
+<div>
+</div>
+
+
+  <!-- Grid row -->
+  <div class="row">
+  {{#each articles}}
+    {{#if @first}}
+      <!-- Grid column -->
+      <div class="col-lg-6 col-md-12">
+
+        <!-- Featured news -->
+        <div class="single-news mb-lg-0 mb-4">
+
+          <!-- Image -->
+          <div class="view overlay rounded z-depth-1-half mb-4">
+            <img class="img-fluid lazyload" data-size="auto" data-src="{{imgSrc}}" data-srcset="{{imgSet}}">
+            <a href="/articles/{{_id}}">
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+
+          <!-- Category -->
+          <div class="news-data d-flex justify-content-between">
+            <a href="#!" class="deep-orange-text">
+              <h6 class="font-weight-bold">{{category}}</h6>
+            </a>
+          </div>
+
+          <!-- Excerpt -->
+          <h3 class="font-weight-bold dark-grey-text mb-3"><a>{{title}}</a></h3>
+          <p class="dark-grey-text mb-lg-0 mb-md-5 mb-3">{{blurb}}</p>
+
+        </div>
+        <!-- Featured news -->
+      <hr class="mb-5">
       </div>
+      <!-- Grid column -->
+    {{else}}
+    {{/if}}
+  {{/each}}  
+
+    <!-- Grid column -->
+    <div class="col-lg-6 col-md-12">
+      {{#each articles}}
+        {{#if @first}}
+        {{else}}
+        <!-- Small news -->
+        <div class="single-news mb-4">
+
+          <!-- Grid row -->
+          <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-3">
+
+              <!--Image-->
+              <div class="view overlay rounded z-depth-1">
+                <img class="img-fluid lazyload" data-size="auto" data-src="{{imgSrc}}" data-srcset="{{imgSet}}">
+                <a href="/articles/{{_id}}">
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+                <a href="#!" class="deep-orange-text mb-4">
+                  <p class="font-weight-bold smallFont">{{category}}</p>
+                </a>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-9">
+
+              <!-- Excerpt -->
+              <p class="font-weight-bold dark-grey-text">{{title}}</p>
+              <div class="d-flex justify-content-between">
+                <div class="col-11 text-truncate pl-0 mb-3">
+                  <a href="/articles/{{_id}}" class="dark-grey-text">{{blurb}}</a>
+                </div>
+                <a href="/articles/{{_id}}"><i class="fas fa-angle-double-right"></i></a>
+              </div>
+
+            </div>
+            <!-- Grid column -->
+
+          </div>
+          <!-- Grid row -->
+
+        </div>
+        <!-- Small news -->
+        {{/if}}
+      {{/each}}  
     </div>
+    <!--Grid column-->
+
   </div>
+  <!-- Grid row -->
+
+</section>
+<!-- Section: Magazine v.2 -->
+</div>
 
 </main>

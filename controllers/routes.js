@@ -8,13 +8,17 @@ const findAndShowAllArticles = (res) =>{
     db.Article.find({})
     .then(articles => {
         const articlesObj = {}
-        articlesObj.artciles = articles
-        articlesObj.categories = []
+        articlesObj.articles = articles
+        const categoryArr = []
         articles.forEach(el => {
             const category = el.category
-            if (articlesObj.categories.indexOf(category) === -1){
-                articlesObj.categories.push(category)
+            if (categoryArr.indexOf(category) === -1){
+                categoryArr.push(category)
             }
+        });
+        articlesObj.categories = [{name: "All Articles"}]
+        categoryArr.forEach(element => {
+            articlesObj.categories.push({name: element})
         });
         console.log(articlesObj)
         res.render("index", articlesObj)
@@ -79,6 +83,17 @@ router.get("/saved", (req, res) => {
     .then((data) => {
         let saved = data
         res.render("saved", saved)
+    })
+    .catch(err => console.log(err))
+})
+
+router.get("/articles/:id", (req, res) =>{
+    let id = req.params.id
+    db.Articles.findbyId(id)
+    .populate("note")
+    .then((article) =>{
+        let articleObj = {article: article}
+        res.render("article", articleObj)
     })
     .catch(err => console.log(err))
 })
