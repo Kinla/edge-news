@@ -13,27 +13,26 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/style.css">
+    <!-- Lazy Size -->
+    <script src="./js/lazySize.js" type ="text/javascript" async=""></script>
 </head>
 <body>
     <!--Main Navigation-->
     <header>
 
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
-        <a class="navbar-brand" href="#"><strong>Sci Edge</strong></a>
+        <a class="navbar-brand logo" href="/"><strong>Sci Edge</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="#">Saved Article</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link btn" href="#">Profile</a>
+            <a class="nav-link" href="/saved">Saved Article</a>
             </li>
         </ul>
         </div>
@@ -43,13 +42,15 @@
         <div class="full-bg-img">
         <div class="mask rgba-purple-light flex-center">
             <div class="container text-center white-text wow fadeInUp">
-            <h2>This Navbar is fixed and transparent</h2>
-            <br>
-            <h5>It will always stay visible on the top, even when you scroll down</h5>
-            <p>Navbar's background will switch from transparent to solid color while scrolling down</p>
-            <br>
-            <p>Full page intro with background image will be always displayed in full screen mode, regardless of
-                device </p>
+            <br><br><br><br><br>
+                <h1 class="logo">Science Edge</h1>
+                <br>
+                <h5>Do you know how common everyday items, such as mirrors, fireworks or sunglasses work?</h5>
+                <h5>This collection of Innovation articles explores the workings of objects you may come into contact with on a regular basis.</h5>
+                <h5>Read and comment on the lastest articles.</h5>
+                <br><br><br><br>
+                <p>scroll</p>
+                <div class=""><i class="fas fa-long-arrow-alt-down"></i></div>
             </div>
         </div>
         </div>
@@ -81,5 +82,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>    
+    <!-- Custom JavaScript -->
+    <script type ="text/javascript" src="./js/app.js"></script>
 </body>
 </html>
