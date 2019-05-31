@@ -22,64 +22,16 @@ const findAndShowAllArticles = (res) =>{
     .catch(err => console.log(err))
 }
 
-// router.get("/", async(req, res) => {
-//     await scrapeAndUpdate()
-//     await findAllArticles(res)
-// })
-
-// router.get("/", (req, res) => {
-//     return axios.get("https://science.howstuffworks.com/innovation")
-//     .then((response) =>{
-//         const $ = cheerio.load(response.data)
-//         return Promise.all([response, $(".module #landing-content.articles div.media").each(function (i, element){
-//             const result = {}
-
-//             result.title = $(this)
-//                 .children(".media-body")
-//                 .find("h5")
-//                 .text()
-
-//             result.link = $(this)
-//                 .find("a")
-//                 .attr("href")
-
-//             result.imgSet = $(this)
-//                 .find("img") 
-//                 .attr("data-srcset")
-
-//             result.imgSrc = $(this)
-//                 .find("img")
-//                 .attr("src") 
-
-//             result.blurb = $(this)
-//                 .children(".media-body")
-//                 .find("p")
-//                 .text()
-
-//             result.category = $(this)
-//                 .children(".media-body")
-//                 .find("span:last-child")
-//                 .text()
-//                 .split(" / ")[1]
-
-//             db.Article.updateOne({title: result.title}, {$set: result}, {upsert: true})
-//             .then((data) => {
-//                 console.log(data)
-//             })
-//             .catch(err => console.log(err))
-//         })])
-//     .then(()=>{
-//         findAllArticles(res)
-//     })    
-//     })
-// })
-
-
 router.get("/", (req, res) => {
-    axios.get("https://science.howstuffworks.com/innovation")
+    return axios.get("https://science.howstuffworks.com/innovation")
     .then((response) =>{
         const $ = cheerio.load(response.data)
-        $(".module #landing-content.articles div.media").each(function (i, element){
+        let divs = $(".module #landing-content.articles div.media").nextAll()
+        let count = divs.length -2
+        console.log(count)
+        $(".module #landing-content.articles div.media")
+        .each(function (i, element){
+            console.log(i)
             const result = {}
 
             result.title = $(this)
@@ -113,17 +65,19 @@ router.get("/", (req, res) => {
             db.Article.updateOne({title: result.title}, {$set: result}, {upsert: true})
             .then((data) => {
                 console.log(data)
+                if (i === count){
+                    findAndShowAllArticles(res)
+                }
             })
             .catch(err => console.log(err))
         })
-        findAndShowAllArticles(res)
     })
 })
 
 router.get("/saved", (req, res) => {
     db.Article.find({saved: true})
     .then((data) => {
-        let saved = {saved: data}
+        let saved = data
         res.render("saved", saved)
     })
     .catch(err => console.log(err))
