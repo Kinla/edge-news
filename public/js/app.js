@@ -43,7 +43,31 @@ $(document).ready(()=>{
 
         $.post("/saved/"+id, {id: id}, (data)=>{
             console.log(`${data} saved`)
-    })
+        })
     })
 
+    //Unsave article
+    $(".unsave").on("click", function (e){
+        e.preventDefault()
+
+        let id = $(this).attr("data-id")
+
+        $.post("/unsave/"+id, id, (data) =>{
+            console.log(`${data} posted to server`)
+            window.location = data.redirect
+        })
+    })
+
+    //Category filter -- doesn't work yet
+    $(".categoryBtn").on("click", function (e) {
+        e.preventDefault()
+
+        let category = {category: $(this).text()}
+        let routeName = $(this).text().split(" ").join("")
+        
+        $.get("/category/"+routeName, category, (data) =>{
+       
+        })
+
+    })
 })

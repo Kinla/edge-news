@@ -20,7 +20,6 @@ const findAndShowAllArticles = (res) =>{
         categoryArr.forEach(element => {
             articlesObj.categories.push({name: element})
         });
-        console.log(articlesObj)
         res.render("index", articlesObj)
     })
     .catch(err => console.log(err))
@@ -32,10 +31,8 @@ router.get("/", (req, res) => {
         const $ = cheerio.load(response.data)
         let divs = $(".module #landing-content.articles div.media").nextAll()
         let count = divs.length -2
-        console.log(count)
         $(".module #landing-content.articles div.media")
         .each(function (i, element){
-            console.log(i)
             const result = {}
 
             result.title = $(this)
@@ -68,7 +65,6 @@ router.get("/", (req, res) => {
 
             db.Article.updateOne({title: result.title}, {$set: result}, {upsert: true})
             .then((data) => {
-                console.log(data)
                 if (i === count){
                     findAndShowAllArticles(res)
                 }
@@ -123,5 +119,28 @@ router.post("/saved/:id", (req, res)=>{
     })
     .catch(err => console.log(err))
 })
+
+router.post("/unsave/:id", (req, res)=>{
+    let id = req.params.id
+    db.Article.updateOne({_id: id}, {$set: {saved: false}})
+    .then(data => {
+        res.send({
+            redirect: "/saved"
+        })        
+    })
+    .catch(err => console.log(err))
+})
+
+//Individual category -- doesn't work yet
+router.get("/category/:type", (req, res)=>{
+    console.log(req.query)
+    db.Article.find(req.query)
+    .then(article =>{
+        console.log(article)
+        const articlesObj = {articles: article}
+        res.render("", articlesObj)
+    })
+})
+
 
 module.exports = router
