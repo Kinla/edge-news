@@ -36,13 +36,14 @@ $(document).ready(()=>{
       };
 
     //Save article
-    $("#saveArticle").on("click", function(e){
+    $(".saveArticle").on("click", function(e){
         e.preventDefault()
 
         let id = $(this).attr("data-id")
 
         $.post("/saved/"+id, {id: id}, (data)=>{
             console.log(`${data} saved`)
+            location.reload()
         })
     })
 
@@ -54,7 +55,7 @@ $(document).ready(()=>{
 
         $.post("/unsave/"+id, id, (data) =>{
             console.log(`${data} posted to server`)
-            window.location = data.redirect
+            location.reload()      
         })
     })
 
@@ -70,4 +71,6 @@ $(document).ready(()=>{
         })
 
     })
+
+
 })

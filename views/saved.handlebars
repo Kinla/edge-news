@@ -13,7 +13,7 @@
           <a class="nav-link" href="/">Home</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="/saved">Saved Articles</a>
+          <a class="nav-link" href="/saved">Bookmarks</a>
         </li>
       </ul>
     </div>
@@ -61,14 +61,21 @@
             <div class="col-md-9">
 
               <!-- Excerpt -->
-              <p class="font-weight-bold dark-grey-text">{{title}}</p>
+              <div>
+              {{#unless saved}}
+              <a class="saveArticle mr-2" data-id="{{id}}"><i class="far fa-bookmark purple-text"></i></a>
+              {{/unless}}
+              {{#if saved}}
+              <a class="unsave mr-2" data-id="{{id}}"><i class="fas fa-bookmark purple-text"></i></a>
+              {{/if}}  
+              <span class="font-weight-bold dark-grey-text">{{title}}</span>
+              </div>
               <div class="d-flex justify-content-between">
-                <div class="col-md-11 col-sm-12 pl-0 mb-3">
+                <div class="col-md-11 pl-0 mb-3">
                   <a href="/articles/{{_id}}" class="dark-grey-text ">{{blurb}}</a>
                 </div>
                 <div class="text-center">
                 <a href="/articles/{{_id}}"><i class="fas fa-angle-double-right"></i></a>
-                <button class="btn btn-purple btn-sm unsave" data-id="{{_id}}">Remove</button>    
 
                 </div>
               </div>

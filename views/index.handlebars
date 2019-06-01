@@ -13,7 +13,7 @@
             <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="/saved">Saved Article</a>
+            <a class="nav-link" href="/saved">Bookmarks</a>
             </li>
         </ul>
         </div>
@@ -84,7 +84,16 @@
           </div>
 
           <!-- Excerpt -->
-          <h3 class="font-weight-bold dark-grey-text mb-3 text-center"><a href="/articles/{{id}}" class="dark-grey-text">{{title}}</a></h3>
+
+          <h3 class="font-weight-bold dark-grey-text mb-3 text-center">
+          {{#unless saved}}
+          <a class="saveArticle mr-2" data-id="{{id}}"><i class="far fa-bookmark purple-text"></i></a>
+          {{/unless}}
+          {{#if saved}}
+          <a class="unsave mr-2" data-id="{{id}}"><i class="fas fa-bookmark purple-text"></i></a>
+          {{/if}}    
+            <a href="/articles/{{id}}" class="dark-grey-text">{{title}}</a>
+          </h3>
           <p class="dark-grey-text mb-lg-0 mb-sm-5 mb-5 text-center">{{blurb}}</p>
 
         </div>
@@ -119,7 +128,15 @@
             <div class="col-md-9">
 
               <!-- Excerpt -->
-              <p class="font-weight-bold dark-grey-text">{{title}}</p>
+              <div>
+              {{#unless saved}}
+              <a class="saveArticle mr-2" data-id="{{id}}"><i class="far fa-bookmark purple-text"></i></a>
+              {{/unless}}
+              {{#if saved}}
+              <a class="unsave mr-2" data-id="{{id}}"><i class="fas fa-bookmark purple-text"></i></a>
+              {{/if}}  
+              <span class="font-weight-bold dark-grey-text">{{title}}</span>
+              </div>
               <div class="d-flex justify-content-between">
                 <div class="col-11 pl-0 mb-3">
                   <a href="/articles/{{_id}}" class="dark-grey-text">{{blurb}}</a>
