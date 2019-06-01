@@ -43,3 +43,7 @@ body,
 }
 
 .card-comments img{width:4rem}
+
+main {
+    min-height: calc(100vh - 54px);
+}

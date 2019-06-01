@@ -13,7 +13,7 @@
           <a class="nav-link" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Saved Articles</a>
+          <a class="nav-link" href="/saved">Saved Articles</a>
         </li>
       </ul>
     </div>
@@ -59,7 +59,7 @@
 
                                 <div class="text-center">
                                 <a href="{{link}}" target="_blank" class="btn btn-purple btn-sm">Read full article</a>
-                                <a href="/saved/{{id}}"class="btn btn-purple btn-sm">Save Article</a>    
+                                <a class="btn btn-purple btn-sm" id="saveArticle" data-id="{{id}}">Save Article</a>    
                                 </div>
 
                             </div>
@@ -73,6 +73,7 @@
                             <div class="card-body">
                                 {{#each comment}}
                                 <div class="media d-block d-md-flex mt-3">
+                                    <img class="d-flex mb-3 mx-auto " src="https://kooledge.com/assets/default_medium_avatar-57d58da4fc778fbd688dcbc4cbc47e14ac79839a9801187e42a796cbd6569847.png" alt="Generic placeholder image">
                                     <div class="media-body text-center text-md-left ml-md-3 ml-0">
                                         <h5 class="mt-0 font-weight-bold">{{name}}</h5>
                                         {{body}}

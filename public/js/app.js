@@ -35,4 +35,15 @@ $(document).ready(()=>{
         return valid
       };
 
+    //Save article
+    $("#saveArticle").on("click", function(e){
+        e.preventDefault()
+
+        let id = $(this).attr("data-id")
+
+        $.post("/saved/"+id, {id: id}, (data)=>{
+            console.log(`${data} saved`)
+    })
+    })
+
 })

@@ -1,0 +1,95 @@
+<!--Main Navigation-->
+<header>
+
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark customPurple scrolling-navbar">
+    <a class="navbar-brand logo" href="/"><strong>Sci Edge</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/saved">Saved Articles</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<!--Main Navigation-->
+
+<main class="container py-5">
+
+<!-- Section: Magazine v.2 -->
+<section class="magazine-section my-5">
+
+  <!-- Section description -->
+  <h3 class="text-center purple-text w-responsive mx-auto mb-5 logo">Saved Articles</h3>
+
+  <!-- Grid row -->
+  <div class="row">
+    <!-- Grid column -->
+    <div class="col-12">
+  {{#each articles}}
+        <!-- Small news -->
+        <div class="single-news mb-4">
+
+          <!-- Grid row -->
+          <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-3">
+
+              <!--Image-->
+              <div class="view overlay rounded z-depth-1">
+                <img class="img-fluid lazyload" data-size="auto" data-src="{{imgSrc}}" data-srcset="{{imgSet}}">
+                <a href="/articles/{{_id}}">
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+                <a href="#!" class="purple-text mb-4">
+                  <p class="smallFont text-center logo">{{category}}</p>
+                </a>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-9">
+
+              <!-- Excerpt -->
+              <p class="font-weight-bold dark-grey-text">{{title}}</p>
+              <div class="d-flex justify-content-between">
+                <div class="col-11 pl-0 mb-3">
+                  <a href="/articles/{{_id}}" class="dark-grey-text ">{{blurb}}</a>
+                </div>
+                <div class="text-center">
+                <a href="/articles/{{_id}}"><i class="fas fa-angle-double-right"></i></a>
+                <button class="btn btn-purple btn-sm unsave" data-id="{{_id}}">Remove</button>    
+
+                </div>
+              </div>
+
+            </div>
+            <!-- Grid column -->
+
+          </div>
+          <!-- Grid row -->
+
+        </div>
+        <!-- Small news -->
+  {{/each}}   
+    </div>
+
+
+  </div>
+  <!-- Grid row -->
+
+</section>
+<!-- Section: Magazine v.2 -->
+</div>
+
+</main>

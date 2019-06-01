@@ -81,7 +81,7 @@ router.get("/", (req, res) => {
 router.get("/saved", (req, res) => {
     db.Article.find({saved: true})
     .then((data) => {
-        let saved = data
+        let saved = {articles: data}
         res.render("saved", saved)
     })
     .catch(err => console.log(err))
@@ -115,6 +115,13 @@ router.post("/articles/:id", (req, res) =>{
     .catch(err => console.log(err))
 })
 
-
+router.post("/saved/:id", (req, res)=>{
+    let id = req.params.id
+    db.Article.updateOne({_id: id}, {$set: {saved: true}})
+    .then(data => {
+        res.send("sucess")        
+    })
+    .catch(err => console.log(err))
+})
 
 module.exports = router
