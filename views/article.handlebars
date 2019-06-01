@@ -71,9 +71,8 @@
                         <div class="card card-comments mb-3 wow">
                             <div class="card-header font-weight-bold">Comments</div>
                             <div class="card-body">
-                                {{#each note}}
+                                {{#each comment}}
                                 <div class="media d-block d-md-flex mt-3">
-                                    <img class="d-flex mb-3 mx-auto " src="https://mdbootstrap.com/img/Photos/Avatars/img (30).jpg" alt="Generic placeholder image">
                                     <div class="media-body text-center text-md-left ml-md-3 ml-0">
                                         <h5 class="mt-0 font-weight-bold">{{name}}</h5>
                                         {{body}}
@@ -94,17 +93,17 @@
                                 <form id="commentForm">
 
                                     <!-- Comment -->
-                                    <div class="form-group">
+                                    <div class="form-group" >
                                         <label for="replyFormComment">Your comment</label>
                                         <textarea class="form-control" id="comment" rows="5" required></textarea>
                                     </div>
 
                                     <!-- Name -->
                                     <label for="replyFormName">Your name</label>
-                                    <input type="email" id="name" class="form-control" required>
+                                    <input type="name" id="name" class="form-control" required>
 
                                     <div class="text-center mt-4">
-                                        <button class="btn btn-purple btn-md" type="submit">Post</button>
+                                        <button class="btn btn-purple btn-md" type="submit" data-id="{{id}}" id="submitComment">Post</button>
                                     </div>
                                 </form>
                                 <!-- Default form reply -->

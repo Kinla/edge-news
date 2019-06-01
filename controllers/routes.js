@@ -89,15 +89,32 @@ router.get("/saved", (req, res) => {
 
 router.get("/articles/:id", (req, res) =>{
     let id = req.params.id
-    console.log(id)
     db.Article.findById(id)
-    .populate("note")
+    .populate("comment")
     .then((article) =>{
+        console.log(article)
         let articleObj = article
         res.render("article", articleObj)
     })
     .catch(err => console.log(err))
 })
+
+router.post("/articles/:id", (req, res) =>{
+    let id = req.params.id
+    let comment = req.body
+    
+    db.Comment.create(comment)
+    .then((newComment) =>{
+        return db.Article.findByIdAndUpdate(id, { $push: { comment: newComment._id } }, { new: true });
+    })
+    .then((article) =>{
+        res.send({
+            redirect: "/articles/" + id
+        })        
+    })
+    .catch(err => console.log(err))
+})
+
 
 
 module.exports = router
