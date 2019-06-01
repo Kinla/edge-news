@@ -1,5 +1,130 @@
-<div>
-    {{#each article}}
-    <p>{{title}}</p>
-    {{/each}}
-</div>
+<!--Main Navigation-->
+<header>
+
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark customPurple scrolling-navbar">
+    <a class="navbar-brand logo" href="/"><strong>Sci Edge</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Saved Articles</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<!--Main Navigation-->
+
+    <!--Main layout-->
+    <main class="mt-5 pt-5">
+        <div class="container">
+
+            <!--Section: Post-->
+            <section class="mt-4">
+
+                <!--Grid row-->
+                <div class="row">
+
+                    <!--Grid column-->
+                    <div class="col-md-10 mb-4 mx-auto">
+                        
+                        <!-- Category -->
+                        <a href="#!" class="purple-text">
+                        <p class="font-weight-bold">{{category}}</p>
+                        </a>
+
+                        <!--Featured Image-->
+                        <div class="card mb-4 wow fadeIn">
+
+                        <img class="img-fluid lazyload" data-size="auto" data-src="{{imgSrc}}" data-srcset="{{imgSet}}">
+
+                        </div>
+                        <!--/.Featured Image-->
+
+                        <!--Card-->
+                        <div class="card mb-4 wow fadeIn">
+
+                            <!--Card content-->
+                            <div class="card-body">
+
+                                <h4 class="my-4">{{title}}</h4>
+                                <p class="dark-grey-text">{{blurb}}</p>
+                                <br>
+
+                                <div class="text-center">
+                                <a href="{{link}}" target="_blank" class="btn btn-purple btn-sm">Read full article</a>
+                                <a href="/saved/{{id}}"class="btn btn-purple btn-sm">Save Article</a>    
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!--/.Card-->
+
+                        <!--Comments-->
+                        <div class="card card-comments mb-3 wow fadeIn">
+                            <div class="card-header font-weight-bold">Comments</div>
+                            <div class="card-body">
+                                {{#each note}}
+                                <div class="media d-block d-md-flex mt-3">
+                                    <img class="d-flex mb-3 mx-auto " src="https://mdbootstrap.com/img/Photos/Avatars/img (30).jpg" alt="Generic placeholder image">
+                                    <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                                        <h5 class="mt-0 font-weight-bold">{{name}}</h5>
+                                        {{body}}
+                                    </div>
+                                </div>
+                                {{/each}}
+
+                            </div>
+                        </div>
+                        <!--/.Comments-->
+
+                        <!--Reply-->
+                        <div class="card mb-3 wow fadeIn">
+                            <div class="card-header font-weight-bold">Leave a reply</div>
+                            <div class="card-body">
+
+                                <!-- Default form reply -->
+                                <form id="commentForm">
+
+                                    <!-- Comment -->
+                                    <div class="form-group">
+                                        <label for="replyFormComment">Your comment</label>
+                                        <textarea class="form-control" id="comment" rows="5" required></textarea>
+                                    </div>
+
+                                    <!-- Name -->
+                                    <label for="replyFormName">Your name</label>
+                                    <input type="email" id="name" class="form-control" required>
+
+                                    <div class="text-center mt-4">
+                                        <button class="btn btn-purple btn-md" type="submit">Post</button>
+                                    </div>
+                                </form>
+                                <!-- Default form reply -->
+
+
+
+                            </div>
+                        </div>
+                        <!--/.Reply-->
+
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+
+            </section>
+            <!--Section: Post-->
+
+        </div>
+    </main>
+    <!--Main layout-->
+

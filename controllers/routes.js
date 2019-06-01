@@ -89,10 +89,11 @@ router.get("/saved", (req, res) => {
 
 router.get("/articles/:id", (req, res) =>{
     let id = req.params.id
-    db.Articles.findbyId(id)
+    console.log(id)
+    db.Article.findById(id)
     .populate("note")
     .then((article) =>{
-        let articleObj = {article: article}
+        let articleObj = article
         res.render("article", articleObj)
     })
     .catch(err => console.log(err))

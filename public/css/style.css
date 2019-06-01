@@ -29,7 +29,7 @@ footer {
 
 html,
 body,
-header,
+.indexHeader,
 .intro-2 {
   height: 100%;
 }
@@ -37,3 +37,9 @@ header,
 .smallFont {
     font-size:smaller
 }
+
+.customPurple {
+    background-color: #2a0c40;
+}
+
+.card-comments img{width:4rem}

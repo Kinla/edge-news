@@ -1,5 +1,5 @@
     <!--Main Navigation-->
-    <header>
+    <header class="indexHeader">
 
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
         <a class="navbar-brand logo" href="/"><strong>Sci Edge</strong></a>
@@ -39,15 +39,15 @@
     <!--Main Navigation-->
 
 
-<main class="text-center py-5">
-  <div class="">
+<main class=" py-5">
+
+  <div class="container">
+  <div class="text-center">
     {{#each categories}}
     <button class="btn btn-purple btn-sm">{{name}}</button>
     {{/each}}
     
   </div>
-
-  <div class="container">
 <!-- Section: Magazine v.2 -->
 <section class="magazine-section my-5">
 
@@ -61,13 +61,12 @@
 
   <!-- Grid row -->
   <div class="row">
+    <!-- Grid column -->
+    <div class="col-12">
   {{#each articles}}
     {{#if @first}}
-      <!-- Grid column -->
-      <div class="col-lg-6 col-md-12">
-
         <!-- Featured news -->
-        <div class="single-news mb-lg-0 mb-4">
+        <div class="single-news mb-lg-0 mb-5">
 
           <!-- Image -->
           <div class="view overlay rounded z-depth-1-half mb-4">
@@ -78,30 +77,21 @@
           </div>
 
           <!-- Category -->
-          <div class="news-data d-flex justify-content-between">
-            <a href="#!" class="deep-orange-text">
-              <h6 class="font-weight-bold">{{category}}</h6>
+          <div class="news-data d-fle">
+            <a href="#!" class="purple-text">
+              <h6 class="font-weight-bold text-right">{{category}}</h6>
             </a>
           </div>
 
           <!-- Excerpt -->
-          <h3 class="font-weight-bold dark-grey-text mb-3"><a>{{title}}</a></h3>
-          <p class="dark-grey-text mb-lg-0 mb-md-5 mb-3">{{blurb}}</p>
+          <h3 class="font-weight-bold dark-grey-text mb-3 text-center"><a>{{title}}</a></h3>
+          <p class="dark-grey-text mb-lg-0 mb-sm-5 mb-5 text-center">{{blurb}}</p>
 
         </div>
         <!-- Featured news -->
       <hr class="mb-5">
-      </div>
       <!-- Grid column -->
     {{else}}
-    {{/if}}
-  {{/each}}  
-
-    <!-- Grid column -->
-    <div class="col-lg-6 col-md-12">
-      {{#each articles}}
-        {{#if @first}}
-        {{else}}
         <!-- Small news -->
         <div class="single-news mb-4">
 
@@ -118,8 +108,8 @@
                   <div class="mask rgba-white-slight"></div>
                 </a>
               </div>
-                <a href="#!" class="deep-orange-text mb-4">
-                  <p class="font-weight-bold smallFont">{{category}}</p>
+                <a href="#!" class="purple-text mb-4">
+                  <p class="font-weight-bold smallFont text-center">{{category}}</p>
                 </a>
 
             </div>
@@ -131,7 +121,7 @@
               <!-- Excerpt -->
               <p class="font-weight-bold dark-grey-text">{{title}}</p>
               <div class="d-flex justify-content-between">
-                <div class="col-11 text-truncate pl-0 mb-3">
+                <div class="col-11 pl-0 mb-3">
                   <a href="/articles/{{_id}}" class="dark-grey-text">{{blurb}}</a>
                 </div>
                 <a href="/articles/{{_id}}"><i class="fas fa-angle-double-right"></i></a>
@@ -145,10 +135,11 @@
 
         </div>
         <!-- Small news -->
-        {{/if}}
-      {{/each}}  
+
+    {{/if}}
+  {{/each}}   
     </div>
-    <!--Grid column-->
+
 
   </div>
   <!-- Grid row -->
