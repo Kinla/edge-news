@@ -59,18 +59,17 @@ $(document).ready(()=>{
         })
     })
 
-    //Category filter -- doesn't work yet
-    $(".categoryBtn").on("click", function (e) {
-        e.preventDefault()
+    // //Category filter -- doesn't work yet
+    // $(".categoryBtn").on("click", function (e) {
+    //     e.preventDefault()
 
-        let category = {category: $(this).text()}
-        let routeName = $(this).text().split(" ").join("")
+    //     let routeName = $(this).text().split(" ").join("+")
         
-        $.get("/category/"+routeName, category, (data) =>{
-       
-        })
+    //     $.get("/category/"+routeName, (data) =>{
+    //         console.log(`requested for ${routeName}`)
+    //     })
 
-    })
+    // })
 
 
 })

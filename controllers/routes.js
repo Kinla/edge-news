@@ -16,7 +16,7 @@ const findAndShowAllArticles = (res) =>{
                 categoryArr.push(category)
             }
         });
-        articlesObj.categories = [{name: "All Articles"}]
+        articlesObj.categories = []
         categoryArr.forEach(element => {
             articlesObj.categories.push({name: element})
         });
@@ -78,7 +78,9 @@ router.get("/saved", (req, res) => {
     db.Article.find({saved: true})
     .then((data) => {
         let saved = {articles: data}
-        res.render("saved", saved)
+        saved.header = "Bookmarks"
+        saved.bookmark = true
+        res.render("lists", saved)
     })
     .catch(err => console.log(err))
 })
@@ -133,14 +135,20 @@ router.post("/unsave/:id", (req, res)=>{
 
 //Individual category -- doesn't work yet
 router.get("/category/:type", (req, res)=>{
-    console.log(req.query)
-    db.Article.find(req.query)
+    let type = req.params.type
+    console.log(type)
+    db.Article.find({category: type})
     .then(article =>{
         console.log(article)
         const articlesObj = {articles: article}
-        res.render("", articlesObj)
+        articlesObj.header = type
+        articlesObj.bookmark = false
+        res.render("lists", articlesObj)
     })
+    .catch(err => console.log(err))
 })
+
+
 
 
 module.exports = router

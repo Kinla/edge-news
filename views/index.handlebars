@@ -44,7 +44,7 @@
   <div class="container">
   <div class="text-center">
     {{#each categories}}
-    <button class="btn btn-purple btn-sm categoryBtn">{{name}}</button>
+    <a class="btn btn-purple btn-sm categoryBtn" href="/category/{{name}}">{{name}}</a>
     {{/each}}
     
   </div>
@@ -78,7 +78,7 @@
 
           <!-- Category -->
           <div class="news-data d-fle">
-            <a href="#!" class="purple-text">
+            <a href="/category/{{category}}" class="purple-text">
               <h6 class="text-right logo">{{category}}</h6>
             </a>
           </div>
@@ -117,7 +117,7 @@
                   <div class="mask rgba-white-slight"></div>
                 </a>
               </div>
-                <a href="#!" class="purple-text mb-4">
+                <a href="/category/{{category}}" class="purple-text mb-4">
                   <p class="smallFont text-left logo">{{category}}</p>
                 </a>
 
