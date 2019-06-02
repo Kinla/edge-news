@@ -1,6 +1,9 @@
 $(document).ready(()=>{
     //init some MDB JS
     new WOW().init();
+
+    //Init Lazysizes
+    lazySizes.init();
     
     //Post notes to articles    
     $("#submitComment").on("click", function (e){

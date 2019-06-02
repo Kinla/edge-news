@@ -90,7 +90,6 @@ router.get("/articles/:id", (req, res) =>{
     db.Article.findById(id)
     .populate("comment")
     .then((article) =>{
-        console.log(article)
         let articleObj = article
         res.render("article", articleObj)
     })
@@ -136,7 +135,6 @@ router.post("/unsave/:id", (req, res)=>{
 //Individual category
 router.get("/category/:type", (req, res)=>{
     let type = req.params.type
-    console.log(type)
     db.Article.find({category: type})
     .then(article =>{
         const articlesObj = {articles: article}
