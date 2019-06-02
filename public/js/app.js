@@ -58,18 +58,4 @@ $(document).ready(()=>{
             location.reload()      
         })
     })
-
-    // //Category filter -- doesn't work yet
-    // $(".categoryBtn").on("click", function (e) {
-    //     e.preventDefault()
-
-    //     let routeName = $(this).text().split(" ").join("+")
-        
-    //     $.get("/category/"+routeName, (data) =>{
-    //         console.log(`requested for ${routeName}`)
-    //     })
-
-    // })
-
-
 })

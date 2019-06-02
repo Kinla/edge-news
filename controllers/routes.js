@@ -133,13 +133,12 @@ router.post("/unsave/:id", (req, res)=>{
     .catch(err => console.log(err))
 })
 
-//Individual category -- doesn't work yet
+//Individual category
 router.get("/category/:type", (req, res)=>{
     let type = req.params.type
     console.log(type)
     db.Article.find({category: type})
     .then(article =>{
-        console.log(article)
         const articlesObj = {articles: article}
         articlesObj.header = type
         articlesObj.bookmark = false

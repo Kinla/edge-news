@@ -16,16 +16,16 @@
 // });  
 
 const helper = {
-    ifFirstThree: (context, options) => {
+    firstToNum: (context, num, options) => {
         let item = ""
-        for (let i = 0; i < 3; i++){
+        for (let i = 0; i < num-1; i++){
             item = item + options.fn(context[i])
         }
         return item
     },
-    fromFourth: (context, options) =>{
+    fromNum: (context, num, options) =>{
         let item = ""
-        for (let i = 3; i < context.length; i++){
+        for (let i = num-1; i < context.length; i++){
             item = item + options.fn(context[i])
         }
         return item
