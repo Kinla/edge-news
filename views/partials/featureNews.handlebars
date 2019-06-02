@@ -1,0 +1,33 @@
+        <div class="single-news mb-lg-0 mb-5">
+
+          <!-- Image -->
+          <div class="view overlay rounded z-depth-1-half mb-4">
+            <div class="ratio-container unknown-ratio-container">
+            <img class="img-fluid lazyload" data-size="auto" src="{{imgSrc}}" data-srcset="{{imgSet}}">
+            </div>
+            <a href="/articles/{{_id}}">
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+
+          <!-- Category -->
+          <div class="news-data d-fle">
+            <a href="/category/{{category}}" class="purple-text">
+              <h6 class="text-right logo">{{category}}</h6>
+            </a>
+          </div>
+
+          <!-- Excerpt -->
+
+          <h3 class="font-weight-bold dark-grey-text mb-3 text-center">
+          {{#unless saved}}
+          <a class="saveArticle mr-2" data-id="{{id}}"><i class="far fa-bookmark purple-text"></i></a>
+          {{/unless}}
+          {{#if saved}}
+          <a class="unsave mr-2" data-id="{{id}}"><i class="fas fa-bookmark purple-text"></i></a>
+          {{/if}}    
+            <a href="/articles/{{id}}" class="dark-grey-text">{{title}}</a>
+          </h3>
+          <p class="dark-grey-text mb-lg-5 mb-md-5 mb-4 text-center">{{blurb}}</p>
+
+        </div>

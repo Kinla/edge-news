@@ -1,0 +1,54 @@
+        <div class="single-news mb-4">
+
+          <!-- Grid row -->
+          <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-3">
+
+              <!--Image-->
+              <div class="view overlay rounded z-depth-1">
+                <div class="ratio-container unknown-ratio-container">
+                <img class="img-fluid lazyload" data-size="auto" src="{{imgSrc}}" data-srcset="{{imgSet}}">
+                </div>
+                <a href="/articles/{{_id}}">
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+                <a href="#!" class="purple-text mb-4">
+                  <p class="smallFont text-left logo">{{category}}</p>
+                </a>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-9">
+
+              <!-- Excerpt -->
+              <div>
+              {{#unless saved}}
+              <a class="saveArticle mr-2" data-id="{{id}}"><i class="far fa-bookmark purple-text"></i></a>
+              {{/unless}}
+              {{#if saved}}
+              <a class="unsave mr-2" data-id="{{id}}"><i class="fas fa-bookmark purple-text"></i></a>
+              {{/if}}  
+              <span class="font-weight-bold dark-grey-text">{{title}}</span>
+              </div>
+              <div class="d-flex justify-content-between">
+                <div class="col-md-11 pl-0 mb-3">
+                  <a href="/articles/{{_id}}" class="dark-grey-text ">{{blurb}}</a>
+                </div>
+                <div class="text-center">
+                <a href="/articles/{{_id}}"><i class="fas fa-angle-double-right"></i></a>
+
+                </div>
+              </div>
+
+            </div>
+            <!-- Grid column -->
+
+          </div>
+          <!-- Grid row -->
+
+        </div>

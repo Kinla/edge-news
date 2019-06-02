@@ -91,6 +91,7 @@ router.get("/articles/:id", (req, res) =>{
     .populate("comment")
     .then((article) =>{
         let articleObj = article
+        articleObj.bookmark = false
         res.render("article", articleObj)
     })
     .catch(err => console.log(err))
