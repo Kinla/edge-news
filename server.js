@@ -1,9 +1,6 @@
 //Require all npms
 const express = require("express")
 const mongoose = require("mongoose")
-const axios = require("axios")
-const cheerio = require("cheerio")
-const db = require("./models")
 
 //Set up mongoose
 let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/headlines";
@@ -19,7 +16,8 @@ app.use(express.static("public"));
 
 //Set up handlebars
 const exphbs = require("express-handlebars");
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+const hbsHelper = require("./controllers/hbsHelper")
+app.engine("handlebars", exphbs({ defaultLayout: "main", helpers: hbsHelper }));
 app.set("view engine", "handlebars");
 
 // //Routes
