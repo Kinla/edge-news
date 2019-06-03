@@ -26,7 +26,7 @@ const findAndShowAllArticles = (res) =>{
 }
 
 router.get("/", (req, res) => {
-    return axios.get("https://science.howstuffworks.com/innovation")
+    axios.get("https://science.howstuffworks.com/innovation")
     .then((response) =>{
         const $ = cheerio.load(response.data)
         let divs = $(".module #landing-content.articles div.media").nextAll()
