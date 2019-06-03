@@ -20,7 +20,8 @@ const hbsHelper = require("./controllers/hbsHelper")
 app.engine("handlebars", exphbs({ 
     defaultLayout: "main", 
     helpers: hbsHelper,
-    layoutsDir: __dirname + "/views/layouts/",
+    //Tried to register layout and partials but still unable to dynamicaly render through options parameter of res.render
+    layoutsDir: __dirname + "/views/layouts/", 
     partiasDir: __dirname + "/views/partials/" 
 }));
 app.set("view engine", "handlebars");

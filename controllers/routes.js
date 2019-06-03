@@ -4,7 +4,7 @@ const db = require("../models")
 const axios = require("axios")
 const cheerio = require("cheerio")
 
-const findAndShowAllArticles = (res) =>{
+router.get("/", (req, res) => {
     db.Article.find({})
     .then(articles => {
         const articlesObj = {}
@@ -23,9 +23,84 @@ const findAndShowAllArticles = (res) =>{
         res.render("index", articlesObj)
     })
     .catch(err => console.log(err))
-}
+})
 
-router.get("/", (req, res) => {
+router.get("/saved", (req, res) => {
+    db.Article.find({saved: true})
+    .then((data) => {
+        let saved = {articles: data}
+        saved.header = "Bookmarks"
+        saved.bookmark = true
+        res.render("lists", saved)
+    })
+    .catch(err => console.log(err))
+})
+
+router.get("/articles/:id", (req, res) =>{
+    let id = req.params.id
+    db.Article.findById(id)
+    .populate("comment")
+    .then((article) =>{
+        let articleObj = article
+        articleObj.bookmark = false
+        res.render("article", articleObj)
+    })
+    .catch(err => console.log(err))
+})
+
+router.post("/articles/:id", (req, res) =>{
+    let id = req.params.id
+    let comment = req.body
+    
+    db.Comment.create(comment)
+    .then((newComment) =>{
+        return db.Article.findByIdAndUpdate(id, { $push: { comment: newComment._id } }, { new: true });
+    })
+    .then((article) =>{
+        res.send("Commet posted")
+    })
+    .catch(err => console.log(err))
+})
+
+router.post("/saved/:id", (req, res)=>{
+    let id = req.params.id
+    db.Article.updateOne({_id: id}, {$set: {saved: true}})
+    .then(data => {
+        res.send("sucess")        
+    })
+    .catch(err => console.log(err))
+})
+
+router.post("/unsave/:id", (req, res)=>{
+    let id = req.params.id
+    db.Article.updateOne({_id: id}, {$set: {saved: false}})
+    .then(data => {
+        res.send({
+            redirect: "/saved"
+        })        
+    })
+    .catch(err => console.log(err))
+})
+
+//Individual category
+router.get("/category/:type", (req, res)=>{
+    let type = req.params.type
+    db.Article.find({category: type})
+    .then(article =>{
+        const articlesObj = {articles: article}
+        articlesObj.header = type
+        articlesObj.bookmark = false
+        res.render("lists", articlesObj)
+    })
+    .catch(err => console.log(err))
+})
+
+//Admin utility pages
+router.get("/admin", (req, res)=>{
+    res.render("admin")
+})
+
+router.get("/scrape", (req, res) =>{
     axios.get("https://science.howstuffworks.com/innovation")
     .then((response) =>{
         const $ = cheerio.load(response.data)
@@ -66,87 +141,58 @@ router.get("/", (req, res) => {
             db.Article.updateOne({title: result.title}, {$set: result}, {upsert: true})
             .then((data) => {
                 if (i === count){
-                    findAndShowAllArticles(res)
+                    res.send("Finished scraping.")
                 }
             })
             .catch(err => console.log(err))
         })
     })
+
 })
 
-router.get("/saved", (req, res) => {
-    db.Article.find({saved: true})
-    .then((data) => {
-        let saved = {articles: data}
-        saved.header = "Bookmarks"
-        saved.bookmark = true
-        res.render("lists", saved)
+router.get("/clearDB", async (req, res) =>{
+    let article = await db.Article.deleteMany()
+    let comment = await db.Comment.deleteMany()
+    res.json({articles: article, comments: comment})
+})
+
+router.post("/removeDoc", (req, res) => {
+    let collection = req.body.collection
+    let id = req.body.id
+
+    if (collection === "article") {
+        removeArticlebyId(id, res)
+
+    }else if (collection === "comment") {
+        removeCommentbyId(id, res)
+    }
+})
+
+const removeCommentbyId = (id, res) =>{
+    db.Comment.findByIdAndRemove(id)
+    .then(comment =>{
+        return db.Article.updateOne({comment: id}, {$pull: {comment: id}}, {new: true})
+    })
+    .then((article)=>{
+        res.send(`Removed entry ${id} from comment and article collections.`)
     })
     .catch(err => console.log(err))
-})
 
-router.get("/articles/:id", (req, res) =>{
-    let id = req.params.id
-    db.Article.findById(id)
-    .populate("comment")
-    .then((article) =>{
-        let articleObj = article
-        articleObj.bookmark = false
-        res.render("article", articleObj)
-    })
-    .catch(err => console.log(err))
-})
+}
 
-router.post("/articles/:id", (req, res) =>{
-    let id = req.params.id
-    let comment = req.body
-    
-    db.Comment.create(comment)
-    .then((newComment) =>{
-        return db.Article.findByIdAndUpdate(id, { $push: { comment: newComment._id } }, { new: true });
-    })
-    .then((article) =>{
-        res.send({
-            redirect: "/articles/" + id
-        })        
-    })
-    .catch(err => console.log(err))
-})
-
-router.post("/saved/:id", (req, res)=>{
-    let id = req.params.id
-    db.Article.updateOne({_id: id}, {$set: {saved: true}})
-    .then(data => {
-        res.send("sucess")        
-    })
-    .catch(err => console.log(err))
-})
-
-router.post("/unsave/:id", (req, res)=>{
-    let id = req.params.id
-    db.Article.updateOne({_id: id}, {$set: {saved: false}})
-    .then(data => {
-        res.send({
-            redirect: "/saved"
-        })        
-    })
-    .catch(err => console.log(err))
-})
-
-//Individual category
-router.get("/category/:type", (req, res)=>{
-    let type = req.params.type
-    db.Article.find({category: type})
+const removeArticlebyId = (id, res) =>{
+    db.Article.findByIdAndRemove(id)
     .then(article =>{
-        const articlesObj = {articles: article}
-        articlesObj.header = type
-        articlesObj.bookmark = false
-        res.render("lists", articlesObj)
+        let commentId = article.comment
+        
+        commentId.forEach(element => {
+            db.Comment.deleteOne({_id: element})
+            .then(()=>{})
+            .catch(err => console.log(err))
+        });
+
+        res.send("Done removing all traces of this article.")
     })
-    .catch(err => console.log(err))
-})
-
-
-
+}
 
 module.exports = router

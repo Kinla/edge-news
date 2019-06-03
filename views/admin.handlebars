@@ -1,0 +1,36 @@
+<header>
+{{> smallNav}}
+</header>
+
+<main class="py-5">
+    <div class="container">
+        <div class="text-center mb-5 mt-5">
+            <a href="/scrape" target="_blank" class="btn btn-purple btn-sm">Scrape</a> 
+            <a href="/clearDB" target="_blank" class="btn btn-purple btn-sm">Clear DB</a> 
+        </div>
+
+
+
+        <div class="col-md-6 colsm-12 mx-auto">
+            <!-- Form Block -->
+            <form class="border border-light p-5 text-center" id="removeItem">
+
+                <p class="h5 mb-4 text-center">Remove Specific Entry</p>
+
+
+                <input type="text" id="selectedIdForRemoval" class="form-control mb-3" placeholder="Id" required>
+
+                <div class="mb-3">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="defaultInline1" value="article" name="collection">
+                        <label class="custom-control-label" for="defaultInline1">Article</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="defaultInline2" value="comment" name="collection">
+                        <label class="custom-control-label" for="defaultInline2">Comment</label>
+                    </div>
+                </div>
+
+                <button class="btn btn-purple" type="submit" id="submitRemove">Remove</button>
+            </form>
+</main>

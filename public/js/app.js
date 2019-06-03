@@ -2,9 +2,6 @@ $(document).ready(()=>{
     //init some MDB JS
     new WOW().init();
 
-    //Init Lazysizes
-    lazySizes.init();
-    
     //Post notes to articles    
     $("#submitComment").on("click", function (e){
         e.preventDefault()
@@ -18,7 +15,7 @@ $(document).ready(()=>{
         if (isValid(comment)){
             $.post("/articles/"+id, comment, (data) =>{
                 console.log(`${data} posted to server`)
-                window.location = data.redirect
+                location.reload()
             })
         }
 
@@ -60,5 +57,27 @@ $(document).ready(()=>{
             console.log(`${data} posted to server`)
             location.reload()      
         })
+    })
+    
+    //Remove specific entry
+    $("#removeItem").on("submit", function (e){
+        event.preventDefault()
+        let id = $("#selectedIdForRemoval").val()
+        let collection = $("input[name=collection]:checked").val()
+
+        let data = {
+            id: id,
+            collection: collection
+        }
+        let valid = isValid(data)
+
+        if (isValid(data)){
+            $.post("/removeDoc", data, (success) =>{
+                $("#selectedIdForRemoval").val("")
+                $('input[name=collection]').attr('checked', false);
+                alert(success)
+            })
+        }
+
     })
 })

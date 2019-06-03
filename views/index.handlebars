@@ -59,10 +59,11 @@
 </div>
 
 
+{{#if articles}}
   <!-- Grid row -->
   <div class="row">
     <!-- Grid column -->
-    <div class="col-lg-6 col-md-12">
+    <div class="col-lg-5 col-md-12">
     {{#firstToNum articles 3}}
 
         <!-- Featured news -->
@@ -71,7 +72,7 @@
       <!-- Grid column -->
       {{/firstToNum}}
     </div>  
-    <div class="col-lg-6 col-md-12">
+    <div class="col-lg-7 col-md-12">
       <h5 class="font-weight-bold purple-text mb-3">More Articles</h5>
       {{#fromNum articles 3}}
         <!-- Small news -->
@@ -82,6 +83,7 @@
 
   </div>
   <!-- Grid row -->
+{{/if}}
 
 </section>
 <!-- Section: Magazine v.2 -->
