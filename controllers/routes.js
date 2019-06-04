@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
     let categories = await db.Category.find({})
     let docNum = await db.Article.countDocuments()
     let pageCount = Math.ceil(docNum / 12)
-    let pageNum = req.query.p
+    let pageNum = req.query.p || 1
 
     db.Article.find({}).skip(12*(pageNum-1)).limit(12)
     .then(articles => {
@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
         articlesObj.articles = articles
         articlesObj.categories = categories
         articlesObj.pagination = {
-            page: 1,       // The current page the user is on
+            page: pageNum,       // The current page the user is on
             pageCount: pageCount  // The total number of available pages
           }
         articlesObj.partials = ["featureNews", "singleNews"]//doesn't see the desired change (ie only upating these partials instead of rerender whole page with thise options)
@@ -32,13 +32,22 @@ router.get("/", async (req, res) => {
     .catch(err => console.log(err))
 })
 
-router.get("/saved", (req, res) => {
-    db.Article.find({saved: true})
+router.get("/saved", async(req, res) => {
+    let docNum = await db.Article.find({saved: true}).countDocuments()
+    let pageCount = Math.ceil(docNum / 10)
+    let pageNum = req.query.p || 1
+
+    db.Article.find({saved: true}).skip(10*(pageNum-1)).limit(10)
     .then((data) => {
         let saved = {articles: data}
         saved.header = "Bookmarks"
         saved.bookmark = true
         saved.partials = ["singleNews"]
+        saved.pagination = {
+            page: pageNum,       // The current page the user is on
+            pageCount: pageCount  // The total number of available pages
+          }
+
         res.render("lists", saved)
     })
     .catch(err => console.log(err))
@@ -92,13 +101,22 @@ router.post("/unsave/:id", (req, res)=>{
 })
 
 //Individual category
-router.get("/category/:type", (req, res)=>{
+router.get("/category/:type", async(req, res)=>{
     let type = req.params.type
-    db.Article.find({category: type})
+    let docNum = await db.Article.countDocuments({category: type})
+    let pageCount = Math.ceil(docNum / 10)
+    let pageNum = req.query.p || 1
+
+    db.Article.find({category: type}).skip(10*(pageNum-1)).limit(10)
     .then(article =>{
         const articlesObj = {articles: article}
         articlesObj.header = type
         articlesObj.bookmark = false
+        articlesObj.pagination = {
+            page: pageNum,       // The current page the user is on
+            pageCount: pageCount  // The total number of available pages
+          }
+
         res.render("lists", articlesObj)
     })
     .catch(err => console.log(err))
