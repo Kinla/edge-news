@@ -4,23 +4,30 @@ const db = require("../models")
 const axios = require("axios")
 const cheerio = require("cheerio")
 
-router.get("/", (req, res) => {
-    db.Article.find({})
+router.get("/", async (req, res) => {
+    let categories = await db.Category.find({})
+    let docNum = await db.Article.countDocuments()
+    let pageCount = Math.ceil(docNum / 12)
+    let pageNum = req.query.p
+
+    db.Article.find({}).skip(12*(pageNum-1)).limit(12)
     .then(articles => {
-        const articlesObj = {}
+        const articlesObj = {} 
         articlesObj.articles = articles
-        const categoryArr = []
-        articles.forEach(el => {
-            const category = el.category
-            if (categoryArr.indexOf(category) === -1){
-                categoryArr.push(category)
-            }
-        });
-        articlesObj.categories = []
-        categoryArr.forEach(element => {
-            articlesObj.categories.push({name: element})
-        });
-        res.render("index", articlesObj)
+        articlesObj.categories = categories
+        articlesObj.pagination = {
+            page: 1,       // The current page the user is on
+            pageCount: pageCount  // The total number of available pages
+          }
+        articlesObj.partials = ["featureNews", "singleNews"]//doesn't see the desired change (ie only upating these partials instead of rerender whole page with thise options)
+        if (!pageNum || pageNum < 2  ){
+            articlesObj.layout = "home"
+            return res.render("index", articlesObj)
+        } else {
+            articlesObj.layout = "main"
+            return res.render("lists", articlesObj)
+
+        }
     })
     .catch(err => console.log(err))
 })
@@ -31,6 +38,7 @@ router.get("/saved", (req, res) => {
         let saved = {articles: data}
         saved.header = "Bookmarks"
         saved.bookmark = true
+        saved.partials = ["singleNews"]
         res.render("lists", saved)
     })
     .catch(err => console.log(err))
@@ -42,6 +50,7 @@ router.get("/articles/:id", (req, res) =>{
     .populate("comment")
     .then((article) =>{
         let articleObj = article
+        articleObj.count = article.comment.length
         articleObj.bookmark = false
         res.render("article", articleObj)
     })
@@ -132,14 +141,19 @@ router.get("/scrape", (req, res) =>{
                 .find("p")
                 .text()
 
-            result.category = $(this)
-                .children(".media-body")
-                .find("span:last-child")
-                .text()
-                .split(" / ")[1]
-
+            let category = $(this)
+            .children(".media-body")
+            .find("span:last-child")
+            .text()
+            .split(" / ")[1]
+                
+            const newCategory = {name: category} 
+            
             db.Article.updateOne({title: result.title}, {$set: result}, {upsert: true})
             .then((data) => {
+                return db.Category.updateOne(newCategory, {$set: newCategory}, {upsert: true})
+            })
+            .then((cat) => {
                 if (i === count){
                     res.send("Finished scraping.")
                 }

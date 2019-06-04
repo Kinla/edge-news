@@ -17,6 +17,7 @@ app.use(express.static("public"));
 //Set up handlebars
 const exphbs = require("express-handlebars");
 const hbsHelper = require("./controllers/hbsHelper")
+
 app.engine("handlebars", exphbs({ 
     defaultLayout: "main", 
     helpers: hbsHelper,
@@ -25,6 +26,7 @@ app.engine("handlebars", exphbs({
     partiasDir: __dirname + "/views/partials/" 
 }));
 app.set("view engine", "handlebars");
+
 
 // //Routes
 const routes = require("./controllers/routes.js")
