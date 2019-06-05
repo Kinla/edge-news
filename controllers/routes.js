@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
         articlesObj.partials = ["featureNews", "singleNews"]//doesn't see the desired change (ie only upating these partials instead of rerender whole page with thise options)
         
         articlesObj.more = true  
-        if(pageCount === 1){
+        if(pageCount < 2){
             articlesObj.more = false
         }  
         
@@ -55,7 +55,7 @@ router.get("/saved", async(req, res) => {
             pageCount: pageCount  // The total number of available pages
           }
         saved.more = true  
-        if(pageCount === 1){
+        if(pageCount < 2){
             saved.more = false
         }  
         
@@ -128,7 +128,7 @@ router.get("/category/:type", async(req, res)=>{
             pageCount: pageCount  // The total number of available pages
           }
         articlesObj.more = true  
-        if(pageCount === 1){
+        if(pageCount < 2){
             articlesObj.more = false
         }  
         res.render("lists", articlesObj)
