@@ -2,7 +2,7 @@
 
 ## Overview
 
-Sci Edge is a web app that lets users view and leave comments on the latest innovation news scraped from ![How Stuff Works](https://science.howstuffworks.com/innovation). The scraping is done with Mongoose and Cheerio. The rendering is done via express-handlebars.
+Sci Edge is a web app that lets users view and leave comments on the latest innovation news scraped from [How Stuff Works](https://science.howstuffworks.com/innovation). The scraping is done with Mongoose and Cheerio. The rendering is done via express-handlebars.
 
 There is another set of admin utilities as well.
 
