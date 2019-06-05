@@ -199,7 +199,8 @@ router.get("/scrape", (req, res) =>{
 router.get("/clearDB", async (req, res) =>{
     let article = await db.Article.deleteMany()
     let comment = await db.Comment.deleteMany()
-    res.json({articles: article, comments: comment})
+    let category = await db.Category.deleteMany()
+    res.json({articles: article, comments: comment, categories: category})
 })
 
 router.post("/removeDoc", (req, res) => {
