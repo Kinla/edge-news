@@ -178,6 +178,8 @@ router.get("/scrape", (req, res) =>{
             .find("span:last-child")
             .text()
             .split(" / ")[1]
+
+            result.category = category            
                 
             const newCategory = {name: category} 
             
