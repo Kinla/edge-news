@@ -19,11 +19,16 @@ There is another set of admin utilities as well.
 * handlebars-paginate
 * MongoDB / Mongoose
 
+## Demo
+Shows user interactivity only.
+[![demo](https://github.com/Kinla/edgeNews/blob/master/sciedge.PNG)](https://youtu.be/ANn6W7DEa10)
+
+
 ## Pages and Functionalities
 This app contains the following pages:
 
 ### Home
-```
+
 Displays all categories. Displays all articles from the application database. Each article includes the folowing information:
 
      * Headline - the title of the article
@@ -35,30 +40,30 @@ Displays all categories. Displays all articles from the application database. Ea
      * Image - low res image and the image set
 
      * Category - the category of the article
-```
+
 
 ### Category
-```
+
 Displays articles from a specifc category.
-```
+
 
 ### Bookmark
-```
+
 Displays all bookmarked articles.
-```
+
 
 ### Article
-```
+
 Displays inforation of the article including comments. Visiters can leave their comments here.
-```
+
 
 ### Admin
-```
+
 The admin functionalities can be accessed through the cog/gear icon at the footer. The functionalities include:
     * Scrpae - scrape for new articles from How Stuff Works
     * ClearDB - delete all documents for each model
     * Removal form - dete a specific entry and all its relatinal records within the database
-```    
+    
 
 ### Working Components
 * Nab bar
